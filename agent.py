@@ -4,6 +4,10 @@ import json
 from typing import Dict, Any, Optional, List, Annotated, TypedDict
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
@@ -350,17 +354,18 @@ async def interactive_mode(agent: LangGraphAgent):
 
 
 async def main():
-    # Get credentials from environment variables
+    # Get credentials from .env file or environment variables
     GITHUB_PAT = os.getenv("GITHUB_PERSONAL_ACCESS_TOKEN", "")
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
     
     if not GITHUB_PAT:
-        print("Error: GITHUB_PERSONAL_ACCESS_TOKEN environment variable not set!")
+        print("Error: GITHUB_PERSONAL_ACCESS_TOKEN not set!")
+        print("Add it to .env file: GITHUB_PERSONAL_ACCESS_TOKEN=your_token")
         return
     
     if not GEMINI_API_KEY:
-        print("Error: GEMINI_API_KEY environment variable not set!")
-        print("Set it with: export GEMINI_API_KEY='your-key-here'")
+        print("Error: GEMINI_API_KEY not set!")
+        print("Add it to .env file: GEMINI_API_KEY=your_key")
         return
     
     print(f"\n{'='*80}")
