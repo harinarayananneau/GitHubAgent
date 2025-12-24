@@ -1,0 +1,7 @@
+ langgraph
+ langchain
+ langchain-google-genai
+ google-generativeai
+ anthropic-mcp-client
+ gitpython
+ PyGithub
